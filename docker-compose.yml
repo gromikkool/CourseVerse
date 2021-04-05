@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=courses
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    volumes:
+    - ./DB/UDEMYDBCOURS.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3306:3306
+    networks:
+      - backend
+
+  ads-main:
+    build: .
+    depends_on:
+      - mysql
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+
+networks:
+  backend:
