@@ -30,6 +30,7 @@ public class SubjectController {
         subjectService.save(subjectDto);
     }
 
+    @CrossOrigin
     @GetMapping
     public List<SubjectDto> getAllSubjects() {
         return subjectService.getAll();

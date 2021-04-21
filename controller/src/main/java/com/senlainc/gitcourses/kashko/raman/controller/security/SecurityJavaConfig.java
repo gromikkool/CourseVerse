@@ -1,5 +1,7 @@
 package com.senlainc.gitcourses.kashko.raman.controller.security;
 
+import java.util.Arrays;
+
 import com.senlainc.gitcourses.kashko.raman.entity.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +18,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @ComponentScan(basePackages = {"com.senlainc.gitcourses.kashko.raman.controller.*", "com.senlainc.gitcourses.kashko.raman.serviceimpl",
         "com.senlainc.gitcourses.kashko.raman.security"})
@@ -53,9 +58,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(encoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
 
     }
 
@@ -89,5 +92,15 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().disable();
 
+    }
+    @Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
