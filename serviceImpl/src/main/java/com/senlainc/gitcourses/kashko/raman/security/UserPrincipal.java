@@ -3,9 +3,11 @@ package com.senlainc.gitcourses.kashko.raman.security;
 import com.senlainc.gitcourses.kashko.raman.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
+@Transactional
 public class UserPrincipal implements UserDetails {
 
     private User user;
