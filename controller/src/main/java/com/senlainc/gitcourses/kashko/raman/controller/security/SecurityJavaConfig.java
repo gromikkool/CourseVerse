@@ -1,6 +1,7 @@
 package com.senlainc.gitcourses.kashko.raman.controller.security;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import com.senlainc.gitcourses.kashko.raman.entity.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +66,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic().disable()
-                .csrf().disable().cors().disable()
+                .httpBasic().disable().cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
@@ -97,8 +97,8 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource()
     {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedMethods(Collections.singletonList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
