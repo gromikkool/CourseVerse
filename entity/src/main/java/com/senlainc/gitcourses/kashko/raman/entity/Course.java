@@ -20,7 +20,7 @@ public class Course implements Serializable {
     @Column(name = "name_course")
     private String nameOfCourse;
     @JsonBackReference
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id")
     private Subject subject;
     @Column(name = "begin_date", columnDefinition = "timestamp")

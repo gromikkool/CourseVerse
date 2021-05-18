@@ -10,7 +10,6 @@ public class SubjectDto {
     private int id;
     private String name;
     private SectionDto section;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<CourseDto> courses;
 
     public List<CourseDto> getCourses() {

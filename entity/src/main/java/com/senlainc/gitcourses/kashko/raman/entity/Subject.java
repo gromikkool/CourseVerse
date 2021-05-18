@@ -17,7 +17,6 @@ public class Subject implements Serializable {
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
     private Section section;
-    @JsonManagedReference
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private List<Course> courses;
 
