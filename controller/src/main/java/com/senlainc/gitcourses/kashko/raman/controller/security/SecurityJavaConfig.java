@@ -108,4 +108,6 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+    //dasdasd
 }
